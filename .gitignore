@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+*.tgz
+
+# Coverage
+coverage/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# VitePress
+**/.vitepress/cache/
+**/.vitepress/dist/
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Specs (development only)
+specs/
+.specify/
+CLAUDE.md

@@ -1,0 +1,99 @@
+{
+  "name": "@pyyupsk/npm-ts-template",
+  "version": "0.2.1",
+  "description": "A TypeScript library template with modern tooling",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint --cache",
+    "lint:fix": "eslint --fix --cache",
+    "lint:docs": "eslint --cache",
+    "format": "prettier --write --list-different --ignore-path .gitignore --ignore-path .git/info/exclude --cache .",
+    "format:check": "prettier --check --ignore-path .gitignore --ignore-path .git/info/exclude --cache .",
+    "typecheck": "tsc --noEmit",
+    "knip": "knip",
+    "prepare": "lefthook install",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "typescript",
+    "template",
+    "npm",
+    "library",
+    "bun",
+    "prettier",
+    "eslint",
+    "vitest",
+    "git-cliff",
+    "esm",
+    "cjs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pyyupsk/npm-ts-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pyyupsk/npm-ts-template/issues"
+  },
+  "homepage": "https://github.com/pyyupsk/npm-ts-template#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
+    "@commitlint/types": "^20.3.1",
+    "@eslint/js": "^9.39.2",
+    "@tsconfig/strictest": "^2.0.8",
+    "@vitest/coverage-v8": "^4.0.17",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^62.3.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^3.0.5",
+    "globals": "^17.0.0",
+    "jiti": "^2.6.1",
+    "knip": "^5.82.1",
+    "lefthook": "^2.0.15",
+    "markdownlint-cli2": "^0.20.0",
+    "prettier": "^3.8.0",
+    "tsdown": "^0.20.0-beta.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1",
+    "vitepress": "^1.6.4",
+    "vitest": "^4.0.17"
+  },
+  "overrides": {
+    "esbuild": "^0.25.0",
+    "preact": "^10.28.2"
+  }
+}

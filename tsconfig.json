@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@tsconfig/strictest",
+  "compilerOptions": {
+    // Target environment
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    // "lib": ["ES2022", "DOM", "DOM.Iterable"], // Uncomment for Browser
+    // "jsx": "react-jsx",                       // Uncomment for React
+
+    // Module system (works with tsdown bundler)
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
+    // Emit (tsdown handles actual output)
+    "noEmit": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Additional
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
