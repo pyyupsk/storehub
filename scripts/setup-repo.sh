@@ -41,7 +41,7 @@ run_api() {
 # =============================================================================
 # Security Settings
 # =============================================================================
-echo -e "${BLUE}[1/7] Security Settings${NC}"
+echo -e "${BLUE}[1/6] Security Settings${NC}"
 
 run_api "Enable Dependabot alerts" \
   gh api "repos/${REPO}/vulnerability-alerts" -X PUT
@@ -143,6 +143,7 @@ if [[ -n "$REPO_ID" ]]; then
       "parameters": {
         "required_approving_review_count": 0,
         "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": false,
         "require_last_push_approval": false,
         "required_review_thread_resolution": false
       }
@@ -190,6 +191,13 @@ create_label() {
   local name="$1"
   local color="$2"
   local description="$3"
+
+  local encoded_name="${name// /%20}"
+  if gh api "repos/${REPO}/labels/${encoded_name}" >/dev/null 2>&1; then
+    echo -e "  Label '$name' already exists... ${YELLOW}⚠ skipped${NC}"
+    return 0
+  fi
+
   run_api "Create label: $name" \
     gh api "repos/${REPO}/labels" -X POST \
       -f name="$name" \
