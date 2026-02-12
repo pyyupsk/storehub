@@ -14,12 +14,21 @@ on:
 
 jobs:
   release:
-    if: secrets.GH_PAT != '' && secrets.NPM_TOKEN != ''
     runs-on: ubuntu-latest
     permissions:
       contents: write
       id-token: write
     steps:
+      - name: Validate required secrets
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [[ -z "$GH_PAT" || -z "$NPM_TOKEN" ]]; then
+            echo "GH_PAT and NPM_TOKEN secrets are required for release." >&2
+            exit 1
+          fi
+
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
