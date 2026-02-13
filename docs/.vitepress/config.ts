@@ -1,16 +1,16 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: "npm-ts-template",
+  title: "storehub",
   description: "A zero-config TypeScript library template with modern tooling",
-  base: "/npm-ts-template/",
+  base: "/storehub/",
   head: [
     [
       "link",
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "/npm-ts-template/favicon.svg",
+        href: "/storehub/favicon.svg",
       },
     ],
   ],
@@ -55,7 +55,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/pyyupsk/npm-ts-template" },
+      { icon: "github", link: "https://github.com/pyyupsk/storehub" },
     ],
 
     footer: {

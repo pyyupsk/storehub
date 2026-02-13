@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@pyyupsk/npm-ts-template",
+      "name": "@pyyupsk/storehub",
       "devDependencies": {
         "@commitlint/cli": "^20.4.1",
         "@commitlint/config-conventional": "^20.4.1",

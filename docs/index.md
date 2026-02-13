@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: npm-ts-template
+  name: storehub
   text: TypeScript Library Template
   tagline: A zero-config template for building npm packages with modern tooling
   actions:
@@ -11,7 +11,7 @@ hero:
       link: /getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/pyyupsk/npm-ts-template
+      link: https://github.com/pyyupsk/storehub
 
 features:
   - icon: 📦

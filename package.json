@@ -1,5 +1,5 @@
 {
-  "name": "@pyyupsk/npm-ts-template",
+  "name": "@pyyupsk/storehub",
   "version": "0.2.1",
   "description": "A TypeScript library template with modern tooling",
   "type": "module",
@@ -62,12 +62,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pyyupsk/npm-ts-template.git"
+    "url": "git+https://github.com/pyyupsk/storehub.git"
   },
   "bugs": {
-    "url": "https://github.com/pyyupsk/npm-ts-template/issues"
+    "url": "https://github.com/pyyupsk/storehub/issues"
   },
-  "homepage": "https://github.com/pyyupsk/npm-ts-template#readme",
+  "homepage": "https://github.com/pyyupsk/storehub#readme",
   "devDependencies": {
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",

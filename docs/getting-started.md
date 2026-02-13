@@ -10,7 +10,7 @@
 
 ### Option 1: Use GitHub Template (Recommended)
 
-1. Go to [npm-ts-template](https://github.com/pyyupsk/npm-ts-template)
+1. Go to [storehub](https://github.com/pyyupsk/storehub)
 2. Click **"Use this template"** → **"Create a new repository"**
 3. Clone your new repository:
 
@@ -22,7 +22,7 @@ cd YOUR_REPO
 ### Option 2: Clone Directly
 
 ```bash
-git clone https://github.com/pyyupsk/npm-ts-template.git my-library
+git clone https://github.com/pyyupsk/storehub.git my-library
 cd my-library
 rm -rf .git
 git init

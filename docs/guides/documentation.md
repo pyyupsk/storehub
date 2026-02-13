@@ -10,7 +10,7 @@ Start the development server:
 bun run docs:dev
 ```
 
-The site will be available at `http://localhost:5173/npm-ts-template/`.
+The site will be available at `http://localhost:5173/storehub/`.
 
 ## Building
 
@@ -136,9 +136,9 @@ The VitePress config is at `docs/.vitepress/config.ts`:
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: "npm-ts-template",
+  title: "storehub",
   description: "A zero-config TypeScript library template with modern tooling",
-  base: "/npm-ts-template/",
+  base: "/storehub/",
 
   head: [
     [
@@ -146,7 +146,7 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "/npm-ts-template/favicon.svg",
+        href: "/storehub/favicon.svg",
       },
     ],
   ],
