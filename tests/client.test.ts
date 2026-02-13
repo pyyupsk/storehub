@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { type FetchLike, StoreHubApiError, StoreHubClient } from "../src/index";
+import { StoreHubClient } from "../src";
+import { StoreHubApiError } from "../src/error";
+import type { FetchLike, QueryParams } from "../src/types";
 
 describe("StoreHubClient", () => {
   it("throws when storeName is empty", () => {
@@ -18,8 +20,8 @@ describe("StoreHubClient", () => {
     const fetcher = createFetchMock((url, init) => {
       expect(url).toBe("https://api.storehubhq.com/products");
       expect(init?.method).toBe("GET");
-      expect(init?.headers?.Accept).toBe("application/json");
-      expect(init?.headers?.Authorization).toBe(
+      expect(init?.headers?.["Accept"]).toBe("application/json");
+      expect(init?.headers?.["Authorization"]).toBe(
         `Basic ${Buffer.from("demo:secret").toString("base64")}`
       );
 
@@ -68,7 +70,6 @@ describe("StoreHubClient", () => {
     await client.getCustomers({
       firstName: "Ada",
       phone: "0123456789",
-      email: undefined,
     });
   });
 
@@ -101,11 +102,27 @@ describe("StoreHubClient", () => {
       fetcher: createFetchMock(() => textResponse("server error", 500)),
     });
 
-    await expect(client.getStores()).rejects.toMatchObject<StoreHubApiError>({
+    await expect(client.getStores()).rejects.toMatchObject({
       name: "StoreHubApiError",
       status: 500,
       responseBody: "server error",
+    } satisfies Partial<StoreHubApiError>);
+  });
+
+  it("throws for non-primitive query values", async () => {
+    const client = new StoreHubClient({
+      storeName: "demo",
+      apiToken: "secret",
+      fetcher: createFetchMock(() => jsonResponse([])),
     });
+
+    const invalidParams = {
+      custom: { nested: true },
+    } as unknown as QueryParams;
+
+    await expect(client.getTransactions(invalidParams)).rejects.toThrow(
+      "Invalid query value type"
+    );
   });
 });
 

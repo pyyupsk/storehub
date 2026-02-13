@@ -1,241 +1,20 @@
-export type PriceType = "Fixed" | "Variable";
-
-export interface VariantGroupOption {
-  id: string;
-  optionValue: string;
-  priceDifference: number;
-  isDefault?: boolean;
-}
-
-export interface VariantGroup {
-  id: string;
-  name: string;
-  options: VariantGroupOption[];
-}
-
-export interface VariationValue {
-  variantGroupId: string;
-  value: string;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  category?: string;
-  priceType: PriceType;
-  unitPrice?: number;
-  cost?: number | null;
-  barcode?: string;
-  trackStockLevel: boolean;
-  isParentProduct: boolean;
-  variantGroups?: VariantGroup[];
-  parentProductId?: string;
-  variationValues?: VariationValue[];
-  sku?: string;
-}
-
-export type CustomerTag = "" | "ปลีก" | "ราคาส่ง 1" | "ราคาส่ง 2";
-
-export interface Customer {
-  refId: string;
-  firstName: string;
-  lastName: string;
-  phone?: string;
-  email?: string;
-  createdTime: string;
-  modifiedTime: string;
-  tags: CustomerTag[];
-  birthday: null;
-  state?: string;
-  loyalty?: number;
-}
-
-export interface Stock {
-  productId: string;
-  quantityOnHand: number;
-  warningStock?: number;
-}
-
-export interface Transaction {
-  refId: string;
-  invoiceNumber: string;
-  storeId: string;
-  registerId: string;
-  employeeId: string;
-  transactionType: "Sale" | "Return";
-  transactionTime: string;
-  total: number;
-  subTotal: number;
-  tax: number;
-  discount: number;
-  tableId: null | string;
-  roundedAmount: number;
-  serviceCharge: number;
-  seniorDiscount: number;
-  pwdDiscount: number;
-  athleteAndCoachDiscount: number;
-  medalOfValorDiscount: number;
-  soloParentDiscount: number;
-  promotions: TransactionPromotion[];
-  items: TransactionItem[];
-  payments: TransactionPayment[];
-  isCancelled: boolean;
-  terminalNumber: number;
-  channel: string;
-  customerRefId?: string;
-  cancelledTime?: string;
-  cancelledBy?: string;
-  returnReason?: string;
-  saleInvoiceNumber?: string;
-}
-
-export interface TransactionPromotion {
-  id: string;
-  name: string;
-  discount: number;
-  tax: number;
-}
-
-export interface TransactionSelectedOption {
-  groupId: string;
-  optionId: string;
-  optionValue: string;
-  quantity: number;
-}
-
-export interface TransactionItem {
-  productId: string;
-  quantity: number;
-  total: number;
-  subTotal: number;
-  tax?: number;
-  taxCode: string;
-  discount: number;
-  unitPrice?: number;
-  itemType: string;
-  notes: string;
-  promotions: unknown[];
-  selectedOptions?: TransactionSelectedOption[];
-}
-
-export interface TransactionPayment {
-  paymentMethod: string;
-  amount: number;
-}
-
-export interface Employee {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  createdTime: string;
-  modifiedTime: string;
-}
-
-export interface Store {
-  id: string;
-  name: string;
-  address1: string;
-  address2: string;
-  city: string;
-  state: string;
-  country: string;
-  postalCode: string;
-  phone: string;
-  email: string;
-  website: string;
-}
-
-export interface Timesheet {
-  employeeId: string;
-  storeId: string;
-  clockInTime: string;
-  clockOutTime: string;
-}
-
-export interface CustomerSearchParams {
-  [key: string]: PrimitiveQueryValue;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phone?: string;
-}
-
-export interface EmployeeSearchParams {
-  [key: string]: PrimitiveQueryValue;
-  modifiedSince?: string | Date;
-}
-
-export interface TimesheetSearchParams {
-  [key: string]: PrimitiveQueryValue;
-  storeId?: string;
-  employeeId?: string;
-  from?: string | Date;
-  to?: string | Date;
-}
-
-export type PrimitiveQueryValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | null
-  | undefined;
-export type QueryParams = Record<string, PrimitiveQueryValue>;
-
-export interface FetchRequestInitLike {
-  method?: string;
-  headers?: Record<string, string>;
-}
-
-export interface FetchResponseLike {
-  readonly ok: boolean;
-  readonly status: number;
-  json(): Promise<unknown>;
-  text(): Promise<string>;
-}
-
-export type FetchLike = (
-  input: string,
-  init?: FetchRequestInitLike
-) => Promise<FetchResponseLike>;
-
-export interface StoreHubClientConfig {
-  storeName: string;
-  apiToken: string;
-  baseUrl?: string;
-  fetcher?: FetchLike;
-}
-
-/**
- * Error thrown when the StoreHub API responds with a non-success status.
- */
-export class StoreHubApiError extends Error {
-  public readonly status: number;
-  public readonly url: string;
-  public readonly responseBody: string | undefined;
-
-  /**
-   * Creates a StoreHub API error.
-   *
-   * @param message - Error message.
-   * @param options - Error details.
-   * @param options.status - HTTP status code.
-   * @param options.url - Request URL.
-   * @param options.responseBody - Optional raw response body.
-   */
-  public constructor(
-    message: string,
-    options: { status: number; url: string; responseBody?: string }
-  ) {
-    super(message);
-    this.name = "StoreHubApiError";
-    this.status = options.status;
-    this.url = options.url;
-    this.responseBody = options.responseBody;
-  }
-}
+import { StoreHubApiError } from "./error";
+import type {
+  Customer,
+  CustomerSearchParams,
+  Employee,
+  EmployeeSearchParams,
+  FetchLike,
+  FetchResponseLike,
+  Product,
+  QueryParams,
+  Stock,
+  Store,
+  StoreHubClientConfig,
+  Timesheet,
+  TimesheetSearchParams,
+  Transaction,
+} from "./types";
 
 /**
  * Thin API client for StoreHub REST endpoints documented in `docs/StoreHub.md`.
@@ -387,15 +166,7 @@ export class StoreHubClient {
     });
 
     if (!response.ok) {
-      const responseBody = await safeReadResponseBody(response);
-      const options =
-        responseBody === undefined
-          ? { status: response.status, url }
-          : { status: response.status, url, responseBody };
-      throw new StoreHubApiError(
-        `StoreHub request failed (${response.status}) for ${path}.`,
-        options
-      );
+      throw await createStoreHubApiError(path, response, url);
     }
 
     return (await response.json()) as T;
@@ -415,15 +186,7 @@ export class StoreHubClient {
       return null;
     }
     if (!response.ok) {
-      const responseBody = await safeReadResponseBody(response);
-      const options =
-        responseBody === undefined
-          ? { status: response.status, url }
-          : { status: response.status, url, responseBody };
-      throw new StoreHubApiError(
-        `StoreHub request failed (${response.status}) for ${path}.`,
-        options
-      );
+      throw await createStoreHubApiError(path, response, url);
     }
 
     return (await response.json()) as T;
@@ -438,8 +201,7 @@ export class StoreHubClient {
         continue;
       }
 
-      const normalizedValue =
-        value instanceof Date ? value.toISOString() : String(value);
+      const normalizedValue = normalizeQueryValue(value);
       searchParams.set(key, normalizedValue);
     }
 
@@ -483,6 +245,23 @@ function encodeBasicAuth(value: string): string {
   throw new Error("No base64 encoder is available in the current runtime.");
 }
 
+async function createStoreHubApiError(
+  path: string,
+  response: FetchResponseLike,
+  url: string
+): Promise<StoreHubApiError> {
+  const responseBody = await safeReadResponseBody(response);
+  const options =
+    responseBody === undefined
+      ? { status: response.status, url }
+      : { status: response.status, url, responseBody };
+
+  return new StoreHubApiError(
+    `StoreHub request failed (${response.status}) for ${path}.`,
+    options
+  );
+}
+
 async function safeReadResponseBody(
   response: FetchResponseLike
 ): Promise<string | undefined> {
@@ -492,4 +271,26 @@ async function safeReadResponseBody(
   } catch {
     return undefined;
   }
+}
+
+function normalizeQueryValue(
+  value: Exclude<QueryParams[string], null | undefined>
+): string {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (typeof value === "string") {
+    return value;
+  }
+  if (typeof value === "number") {
+    return String(value);
+  }
+  if (typeof value === "boolean") {
+    return value ? "true" : "false";
+  }
+
+  throw new TypeError(
+    "Invalid query value type. Expected string, number, boolean, or Date."
+  );
 }
