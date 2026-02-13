@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { StoreHubClient } from "../src";
-import { StoreHubApiError } from "../src/error";
-import type { FetchLike, QueryParams } from "../src/types";
+import type { FetchLike, QueryParams } from "../src";
+import { StoreHubApiError, StoreHubClient } from "../src";
 
 describe("StoreHubClient", () => {
   it("throws when storeName is empty", () => {

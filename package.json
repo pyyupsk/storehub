@@ -1,6 +1,6 @@
 {
   "name": "@pyyupsk/storehub",
-  "version": "0.2.1",
+  "version": "0.0.0",
   "description": "A TypeScript library template with modern tooling",
   "type": "module",
   "main": "./dist/index.cjs",

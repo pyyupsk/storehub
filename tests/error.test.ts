@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { StoreHubApiError } from "../src/error";
+import { StoreHubApiError } from "../src";
 
 describe("StoreHubApiError", () => {
   const message = "Request failed";
