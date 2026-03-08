@@ -2,116 +2,142 @@
 
 ## Prerequisites
 
-- [Bun](https://bun.sh/) 1.x or later
-- [Node.js](https://nodejs.org/) 20+ (for compatibility)
-- A GitHub account (for publishing)
+- [Node.js](https://nodejs.org/) 20 or later
+- A StoreHub account with API access
 
-## Create Your Project
+## Installation
 
-### Option 1: Use GitHub Template (Recommended)
-
-1. Go to [storehub](https://github.com/pyyupsk/storehub)
-2. Click **"Use this template"** → **"Create a new repository"**
-3. Clone your new repository:
+Install the package from npm:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+npm install @pyyupsk/storehub
 ```
 
-### Option 2: Clone Directly
+or with Bun:
 
 ```bash
-git clone https://github.com/pyyupsk/storehub.git my-library
-cd my-library
-rm -rf .git
-git init
+bun add @pyyupsk/storehub
 ```
 
-## Setup
+## Quick Start
 
-Install dependencies:
+### 1. Get Your API Credentials
+
+You need two pieces of information from StoreHub:
+
+1. **Store Name** - Your store subdomain (e.g., `lingkythailand` from `lingkythailand.storehubhq.com`)
+2. **API Token** - Auto-generated for your account
+
+> **Note:** Contact your StoreHub sales representative to receive your API token.
+
+### 2. Configure Environment Variables
+
+Set up your credentials as environment variables:
 
 ```bash
-bun install
+STOREHUB_USERNAME=your_store_name
+STOREHUB_API_TOKEN=your_api_token
+STOREHUB_STORE_ID=your_store_id
 ```
 
-This will also set up git hooks via Lefthook.
+### 3. Create a Client
 
-## Customize Your Package
+```typescript
+import { StoreHubClient } from "@pyyupsk/storehub";
 
-### 1. Update `package.json`
+const client = new StoreHubClient({
+  storeName: process.env.STOREHUB_USERNAME ?? "",
+  apiToken: process.env.STOREHUB_API_TOKEN ?? "",
+});
+```
 
-```json
-{
-  "name": "your-package-name",
-  "description": "Your package description",
-  "author": "Your Name",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/YOUR_REPO.git"
+### 4. Make Your First Request
+
+```typescript
+// Fetch all products
+const products = await client.getProducts();
+console.log(`Found ${products.length} products`);
+
+// Fetch all stores
+const stores = await client.getStores();
+console.log(`Found ${stores.length} stores`);
+```
+
+## Basic Usage
+
+### Fetching Data
+
+```typescript
+import { StoreHubClient } from "@pyyupsk/storehub";
+
+const client = new StoreHubClient({
+  storeName: "your_store",
+  apiToken: "your_token",
+});
+
+// Get all products
+const products = await client.getProducts();
+
+// Get a specific product by ID
+const product = await client.getProductById("65af8a5f36eca30006e926f8");
+
+// Get customers with filters
+const customers = await client.getCustomers({ firstName: "John" });
+
+// Get transactions
+const transactions = await client.getTransactions();
+
+// Get inventory for a specific store
+const inventory = await client.getInventory("62985f67dd07e0000714ef5c");
+
+// Get employees
+const employees = await client.getEmployees();
+
+// Get all stores
+const stores = await client.getStores();
+
+// Get timesheets with filters
+const timesheets = await client.getTimesheets({
+  storeId: "62985f67dd07e0000714ef5c",
+});
+```
+
+### Error Handling
+
+The client throws `StoreHubApiError` for failed requests:
+
+```typescript
+import { StoreHubClient, StoreHubApiError } from "@pyyupsk/storehub";
+
+const client = new StoreHubClient({
+  storeName: "your_store",
+  apiToken: "your_token",
+});
+
+try {
+  const products = await client.getProducts();
+} catch (error) {
+  if (error instanceof StoreHubApiError) {
+    console.error(`API Error: ${error.status} - ${error.message}`);
+    console.error(`URL: ${error.url}`);
+    console.error(`Response: ${error.responseBody}`);
   }
 }
 ```
 
-### 2. Update Documentation
+### 404 Handling
 
-- `README.md` - Update for your package
-- `LICENSE` - Update copyright holder
-
-### 3. Start Coding
-
-Replace the sample code in `src/index.ts`:
+Lookup methods return `null` when a resource is not found:
 
 ```typescript
-/**
- * Your first function.
- *
- * @param input - Description of the input
- * @returns Description of what it returns
- */
-export function myFunction(input: string): string {
-  return `Result: ${input}`;
+const product = await client.getProductById("non-existent-id");
+if (product === null) {
+  console.log("Product not found");
 }
 ```
 
-### 4. Update Tests
-
-Update `tests/index.test.ts` to match your code:
-
-```typescript
-import { describe, expect, it } from "vitest";
-import { myFunction } from "../src";
-
-describe("myFunction", () => {
-  it("should return formatted result", () => {
-    expect(myFunction("test")).toBe("Result: test");
-  });
-});
-```
-
-## Verify Setup
-
-Run the validation commands:
-
-```bash
-# Build the package
-bun run build
-
-# Run tests
-bun run test
-
-# Check linting
-bun run lint
-
-# Check types
-bun run typecheck
-```
-
-All commands should pass without errors.
-
 ## Next Steps
 
-- [Writing Code](/guides/writing-code) - Learn about JSDoc requirements
-- [Testing](/guides/testing) - Write effective tests
-- [Publishing](/guides/publishing) - Release your first version
+- [API Reference](/api/client) - Learn about all available methods
+- [Resources](/api/resources) - Detailed documentation for each resource
+- [Types](/api/types) - TypeScript type definitions

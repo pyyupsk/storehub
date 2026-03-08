@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: storehub
-  text: TypeScript Library Template
-  tagline: A zero-config template for building npm packages with modern tooling
+  name: StoreHub Client
+  text: TypeScript Client for StoreHub API
+  tagline: A type-safe, modern TypeScript client for the StoreHub POS platform
   actions:
     - theme: brand
       text: Get Started
@@ -14,22 +14,22 @@ hero:
       link: https://github.com/pyyupsk/storehub
 
 features:
-  - icon: 📦
-    title: Dual ESM/CJS Output
-    details: Build for both module systems with tsdown. Automatic type declarations included.
-  - icon: ⚡
-    title: Fast Development
-    details: Bun for blazing-fast installs and scripts. Watch mode for instant feedback.
-  - icon: 🧪
-    title: Testing Ready
-    details: Vitest configured with coverage reports. Write tests from day one.
-  - icon: 🔧
-    title: Automated Quality
-    details: Prettier for formatting, ESLint for linting and import sorting, Lefthook for git hooks.
+  - icon: 🛍️
+    title: StoreHub POS Integration
+    details: Full access to StoreHub APIs including Products, Customers, Transactions, Inventory, Employees, Stores, and Timesheets.
+  - icon: 🔒
+    title: Type-Safe
+    details: Complete TypeScript types for all API responses. Catch errors at compile time, not runtime.
   - icon: 🚀
-    title: Publish with Confidence
-    details: Changesets for versioning. GitHub Actions for automated releases.
-  - icon: 📝
-    title: Documentation Enforced
-    details: JSDoc requirements for public APIs. SonarJS for maintainable code.
+    title: Modern & Lightweight
+    details: Built with modern tooling. Dual ESM/CJS output. No heavy dependencies.
+  - icon: 🎯
+    title: Easy to Use
+    details: Simple, intuitive API. Configure once with store name and API token.
+  - icon: 🧪
+    title: Tested
+    details: Comprehensive test coverage. Verified against real StoreHub API responses.
+  - icon: 📦
+    title: Ready for Production
+    details: Used in production environments. Handles authentication, errors, and edge cases.
 ---
