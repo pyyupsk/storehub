@@ -20,6 +20,7 @@ export interface Transaction {
   athleteAndCoachDiscount: number;
   medalOfValorDiscount: number;
   soloParentDiscount: number;
+  isMemcApplied: boolean;
   promotions: TransactionPromotion[];
   items: TransactionItem[];
   payments: TransactionPayment[];
@@ -58,6 +59,7 @@ export interface TransactionItem {
   unitPrice?: number;
   itemType: string;
   notes: string;
+  deductedTax: number;
   promotions: unknown[];
   selectedOptions?: TransactionSelectedOption[];
 }
