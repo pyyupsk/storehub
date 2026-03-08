@@ -16,6 +16,12 @@ export default defineConfig({
   ],
 
   themeConfig: {
+    logo: {
+      src: "/favicon.png",
+      width: 24,
+      height: 24,
+    },
+
     nav: [
       { text: "Home", link: "/" },
       { text: "Getting Started", link: "/getting-started" },
