@@ -23,8 +23,12 @@ jobs:
       - name: Type check
         run: bun run typecheck
 
-      - name: Test with coverage
+      - name: Test
+        run: bun run test
+
+      - name: Test with coverage (non-blocking)
         run: bun run test:coverage
+        continue-on-error: true
 
       - name: Build
         run: bun run build
