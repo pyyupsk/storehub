@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: StoreHub Client
-  text: TypeScript Client for StoreHub API
-  tagline: A type-safe, modern TypeScript client for the StoreHub POS platform
+  name: "@pyyupsk/storehub"
+  text: Unofficial TypeScript Client
+  tagline: A community-built, type-safe client for the StoreHub POS API
   actions:
     - theme: brand
       text: Get Started
@@ -33,3 +33,7 @@ features:
     title: Ready for Production
     details: Used in production environments. Handles authentication, errors, and edge cases.
 ---
+
+::: warning
+This is an **unofficial** community-built library and is not affiliated with or endorsed by StoreHub.
+:::

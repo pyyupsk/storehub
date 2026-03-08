@@ -2,6 +2,10 @@
 
 The `StoreHubClient` is the main entry point for interacting with the StoreHub API. It provides a simple, type-safe interface for all StoreHub resources.
 
+::: warning
+This is an **unofficial** community-built library and is not affiliated with or endorsed by StoreHub.
+:::
+
 ## Constructor
 
 ```typescript

@@ -1,8 +1,8 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: "StoreHub Client",
-  description: "TypeScript client for the StoreHub POS API",
+  title: "@pyyupsk/storehub",
+  description: "Unofficial TypeScript client for the StoreHub POS API",
   base: "/storehub/",
   head: [
     [

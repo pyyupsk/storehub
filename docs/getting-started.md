@@ -1,5 +1,9 @@
 # Getting Started
 
+::: warning Disclaimer
+This is an **unofficial** community-built library and is not affiliated with or endorsed by StoreHub. All API documentation is based on reverse-engineering the StoreHub API.
+:::
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20 or later
