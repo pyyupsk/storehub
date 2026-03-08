@@ -1,0 +1,127 @@
+/* StoreHub Brand Theme - Orange (#ff6b00) */
+
+:root {
+  /* Brand colors */
+  --vp-c-brand-1: #ff6b00;
+  --vp-c-brand-2: #ff8500;
+  --vp-c-brand-3: #e55f00;
+  --vp-c-brand-soft: rgba(255, 107, 0, 0.08);
+
+  /* Button colors */
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+
+  /* Backgrounds - Clean white/gray */
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f8f9fa;
+  --vp-c-bg-alt: #f5f6f7;
+
+  /* Text colors */
+  --vp-c-text-1: #1d1d1f;
+  --vp-c-text-2: #6e6e73;
+  --vp-c-text-3: #98989d;
+
+  /* Border and divider */
+  --vp-c-divider: #e5e5e5;
+  --vp-c-border: #d2d2d7;
+
+  /* Link color */
+  --vp-c-brand-link: var(--vp-c-brand-1);
+
+  /* Home hero */
+  --vp-home-hero-name-color: var(--vp-c-brand-1);
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    #ff6b00 0%,
+    #ff8500 100%
+  );
+}
+
+/* Dark mode */
+.dark {
+  --vp-c-brand-1: #ff8500;
+  --vp-c-brand-2: #ff6b00;
+  --vp-c-brand-3: #ffa500;
+  --vp-c-brand-soft: rgba(255, 133, 0, 0.12);
+
+  --vp-c-bg: #1c1c1e;
+  --vp-c-bg-soft: #2c2c2e;
+  --vp-c-bg-alt: #252527;
+
+  --vp-c-text-1: #f5f5f7;
+  --vp-c-text-2: #a1a1a6;
+  --vp-c-text-3: #6e6e73;
+
+  --vp-c-divider: #3a3a3c;
+  --vp-c-border: #48484a;
+}
+
+/* Hero button */
+.VPHero .action .VPButton.brand {
+  background-color: var(--vp-c-brand-1);
+}
+
+.VPHero .action .VPButton.brand:hover {
+  background-color: var(--vp-c-brand-2);
+}
+
+/* Feature cards */
+.VPFeature {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.VPFeature .icon {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.VPFeature .title {
+  color: var(--vp-c-text-1);
+}
+
+/* Links */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+/* Navigation active */
+.VPNav .active {
+  color: var(--vp-c-brand-1);
+}
+
+/* Sidebar active */
+.VPSidebarItem.active > .item > .text {
+  color: var(--vp-c-brand-1);
+}
+
+/* Badge */
+.vp-badge {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+/* Custom blocks */
+.custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+}
+
+/* Code tabs */
+.vp-code-group .tabs label.active {
+  color: var(--vp-c-brand-1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-brand-1);
+}

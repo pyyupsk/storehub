@@ -1,6 +1,6 @@
 # Scripts Reference
 
-All available npm scripts and their purposes.
+Available npm scripts for developing and maintaining `@pyyupsk/storehub`.
 
 ## Build Scripts
 
@@ -8,18 +8,6 @@ All available npm scripts and their purposes.
 | ------- | ---------------- | ------------------------------ |
 | `build` | `tsdown`         | Build ESM/CJS bundles to dist/ |
 | `dev`   | `tsdown --watch` | Build in watch mode            |
-
-### Build Output
-
-After running `bun run build`:
-
-```
-dist/
-├── index.mjs       # ESM bundle
-├── index.cjs       # CommonJS bundle
-├── index.d.mts     # ESM type declarations
-└── index.d.cts     # CJS type declarations
-```
 
 ## Test Scripts
 
@@ -29,24 +17,13 @@ dist/
 | `test:watch`    | `vitest`                | Run tests in watch mode |
 | `test:coverage` | `vitest run --coverage` | Run tests with coverage |
 
-### Coverage Output
-
-After `bun run test:coverage`:
-
-```
-coverage/
-├── html/           # Interactive HTML report
-├── coverage-final.json  # JSON data for CI
-└── text output     # Terminal summary
-```
-
 ## Lint Scripts
 
 | Script         | Command                | Description             |
 | -------------- | ---------------------- | ----------------------- |
 | `lint`         | `eslint --cache`       | Check code quality      |
 | `lint:fix`     | `eslint --fix --cache` | Fix auto-fixable issues |
-| `lint:docs`    | `eslint --cache`       | Check JSDoc only        |
+| `lint:docs`    | `eslint --cache`       | Check documentation     |
 | `format`       | `prettier --write .`   | Format code             |
 | `format:check` | `prettier --check .`   | Check formatting (CI)   |
 | `typecheck`    | `tsc --noEmit`         | Check TypeScript types  |
@@ -57,19 +34,6 @@ coverage/
 | ------ | ------- | --------------------- |
 | `knip` | `knip`  | Find unused code/deps |
 
-### Knip Output
-
-Shows unused:
-
-- Exports
-- Dependencies
-- Files
-- Types
-
-## Release
-
-Releases are handled via manual workflow dispatch in GitHub Actions. See [Publishing Guide](/guides/publishing) for details.
-
 ## Documentation Scripts
 
 | Script         | Command                  | Description               |
@@ -78,28 +42,19 @@ Releases are handled via manual workflow dispatch in GitHub Actions. See [Publis
 | `docs:build`   | `vitepress build docs`   | Build docs for production |
 | `docs:preview` | `vitepress preview docs` | Preview built docs        |
 
-## Setup Scripts
-
-| Script    | Command            | Description       |
-| --------- | ------------------ | ----------------- |
-| `prepare` | `lefthook install` | Install git hooks |
-
-Runs automatically after `bun install`.
-
 ## Common Workflows
 
 ### Development
 
 ```bash
-# Start development
-bun run dev          # Watch mode build
-bun run test:watch   # Watch mode tests
+# Start development (watch mode)
+bun run dev
 ```
 
 ### Before Committing
 
 ```bash
-# Manual checks (also run automatically by Lefthook)
+# Run all checks
 bun run lint
 bun run typecheck
 bun run test
@@ -114,9 +69,6 @@ bun run lint
 bun run typecheck
 bun run test:coverage
 bun run knip
-
-# Create changeset
-bun run changeset
 ```
 
 ### Documentation
@@ -129,12 +81,3 @@ bun run docs:dev
 bun run docs:build
 bun run docs:preview
 ```
-
-## Exit Codes
-
-All scripts return:
-
-- `0` - Success
-- `1` - Failure (errors found)
-
-Failed scripts block git commits (via Lefthook) and CI builds.
