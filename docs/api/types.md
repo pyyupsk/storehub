@@ -316,11 +316,5 @@ class StoreHubApiError extends Error {
 ```typescript
 type QueryParams = Record<string, PrimitiveQueryValue>;
 
-type PrimitiveQueryValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | null
-  | undefined;
+type PrimitiveQueryValue = string | number | boolean | Date | null | undefined;
 ```

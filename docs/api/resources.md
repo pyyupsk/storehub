@@ -27,6 +27,7 @@ const product = await client.product.getById("65af8a5f36eca30006e926f8");
 ```
 
 **Parameters:**
+
 - `id` - Product ID
 
 **Returns:** `Promise<Product | null>` - Returns `null` if not found
@@ -61,6 +62,7 @@ const customers = await client.customer.list({
 ```
 
 **Parameters:**
+
 - `params` (optional) - Filter parameters:
   - `firstName` - Filter by first name (begins with)
   - `lastName` - Filter by last name (begins with)
@@ -74,10 +76,13 @@ const customers = await client.customer.list({
 Fetch a customer by reference ID.
 
 ```typescript
-const customer = await client.customer.getByRefId("9bb4e822-92bd-4228-b958-69474c71cae8");
+const customer = await client.customer.getByRefId(
+  "9bb4e822-92bd-4228-b958-69474c71cae8"
+);
 ```
 
 **Parameters:**
+
 - `refId` - Customer reference ID
 
 **Returns:** `Promise<Customer | null>` - Returns `null` if not found
@@ -106,6 +111,7 @@ const transactions = await client.transaction.list({
 ```
 
 **Parameters:**
+
 - `params` (optional) - Filter parameters (see StoreHub API for available query params)
 
 **Returns:** `Promise<Transaction[]>`
@@ -123,10 +129,13 @@ Manage inventory/stock levels in your StoreHub store.
 Fetch inventory for a specific store.
 
 ```typescript
-const inventory = await client.inventory.getByStoreId("62985f67dd07e0000714ef5c");
+const inventory = await client.inventory.getByStoreId(
+  "62985f67dd07e0000714ef5c"
+);
 ```
 
 **Parameters:**
+
 - `storeId` - Store ID
 
 **Returns:** `Promise<Stock[]>`
@@ -154,6 +163,7 @@ const employees = await client.employee.list({
 ```
 
 **Parameters:**
+
 - `params` (optional) - Filter parameters:
   - `modifiedSince` - Only return employees modified since this date
 
@@ -194,10 +204,14 @@ Fetch timesheets with optional filters.
 const timesheets = await client.timesheet.list();
 
 // Filter by store
-const timesheets = await client.timesheet.list({ storeId: "62985f67dd07e0000714ef5c" });
+const timesheets = await client.timesheet.list({
+  storeId: "62985f67dd07e0000714ef5c",
+});
 
 // Filter by employee
-const timesheets = await client.timesheet.list({ employeeId: "62985f67dd07e0000714f028" });
+const timesheets = await client.timesheet.list({
+  employeeId: "62985f67dd07e0000714f028",
+});
 
 // Filter by date range
 const timesheets = await client.timesheet.list({
@@ -207,6 +221,7 @@ const timesheets = await client.timesheet.list({
 ```
 
 **Parameters:**
+
 - `params` (optional) - Filter parameters:
   - `storeId` - Filter by store ID
   - `employeeId` - Filter by employee ID

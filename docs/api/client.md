@@ -12,12 +12,12 @@ const client = new StoreHubClient(config: StoreHubClientConfig);
 
 ### Configuration
 
-| Property     | Type     | Required | Default                      | Description                                      |
-| ------------ | -------- | -------- | ---------------------------- | ------------------------------------------------ |
-| `storeName`  | `string` | Yes      | -                            | Your store name (subdomain)                      |
-| `apiToken`   | `string` | Yes      | -                            | Your API token                                   |
-| `baseUrl`    | `string` | No       | `https://api.storehubhq.com` | Custom API base URL                              |
-| `fetcher`    | `Fetch`  | No       | `globalThis.fetch`           | Custom fetch implementation (for Node.js < 18)   |
+| Property    | Type     | Required | Default                      | Description                                    |
+| ----------- | -------- | -------- | ---------------------------- | ---------------------------------------------- |
+| `storeName` | `string` | Yes      | -                            | Your store name (subdomain)                    |
+| `apiToken`  | `string` | Yes      | -                            | Your API token                                 |
+| `baseUrl`   | `string` | No       | `https://api.storehubhq.com` | Custom API base URL                            |
+| `fetcher`   | `Fetch`  | No       | `globalThis.fetch`           | Custom fetch implementation (for Node.js < 18) |
 
 ### Example
 
@@ -52,7 +52,9 @@ const customers = await client.getCustomers();
 const customers = await client.getCustomers({ firstName: "John" });
 
 // Get a customer by refId (returns null if not found)
-const customer = await client.getCustomerByRefId("9bb4e822-92bd-4228-b958-69474c71cae8");
+const customer = await client.getCustomerByRefId(
+  "9bb4e822-92bd-4228-b958-69474c71cae8"
+);
 ```
 
 ### Transaction Methods
@@ -115,13 +117,13 @@ For more granular control, you can use the resource clients directly:
 
 ```typescript
 // Access resource clients
-client.product      // ProductResource
-client.customer     // CustomerResource
-client.transaction  // TransactionResource
-client.inventory    // InventoryResource
-client.employee     // EmployeeResource
-client.store        // StoreResource
-client.timesheet    // TimesheetResource
+client.product; // ProductResource
+client.customer; // CustomerResource
+client.transaction; // TransactionResource
+client.inventory; // InventoryResource
+client.employee; // EmployeeResource
+client.store; // StoreResource
+client.timesheet; // TimesheetResource
 ```
 
 See [Resources](/api/resources) for detailed documentation on each resource.
@@ -139,9 +141,9 @@ try {
   await client.getProducts();
 } catch (error) {
   if (error instanceof StoreHubApiError) {
-    console.error(error.status);        // HTTP status code
-    console.error(error.url);           // Request URL
-    console.error(error.responseBody);  // Raw response body
+    console.error(error.status); // HTTP status code
+    console.error(error.url); // Request URL
+    console.error(error.responseBody); // Raw response body
   }
 }
 ```

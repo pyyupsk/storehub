@@ -9,8 +9,8 @@ export default defineConfig({
       "link",
       {
         rel: "icon",
-        type: "image/svg+xml",
-        href: "/storehub/favicon.svg",
+        type: "image/png",
+        href: "/storehub/favicon.png",
       },
     ],
   ],
