@@ -1,5 +1,11 @@
 {
   "$schema": "./node_modules/knip/schema.json",
   "project": ["src/**/*.ts"],
-  "ignore": ["dist/**"]
+  "ignoreDependencies": [
+    "@eslint/js",
+    "eslint-plugin-jsdoc",
+    "eslint-plugin-simple-import-sort",
+    "globals",
+    "typescript-eslint"
+  ]
 }
