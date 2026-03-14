@@ -19,14 +19,12 @@ Available npm scripts for developing and maintaining `@pyyupsk/storehub`.
 
 ## Lint Scripts
 
-| Script         | Command                | Description             |
-| -------------- | ---------------------- | ----------------------- |
-| `lint`         | `eslint --cache`       | Check code quality      |
-| `lint:fix`     | `eslint --fix --cache` | Fix auto-fixable issues |
-| `lint:docs`    | `eslint --cache`       | Check documentation     |
-| `format`       | `prettier --write .`   | Format code             |
-| `format:check` | `prettier --check .`   | Check formatting (CI)   |
-| `typecheck`    | `tsc --noEmit`         | Check TypeScript types  |
+| Script      | Command                | Description             |
+| ----------- | ---------------------- | ----------------------- |
+| `lint`      | `eslint --cache`       | Check code quality      |
+| `lint:fix`  | `eslint --fix --cache` | Fix auto-fixable issues |
+| `lint:docs` | `eslint --cache`       | Check documentation     |
+| `typecheck` | `tsc --noEmit`         | Check TypeScript types  |
 
 ## Quality Scripts
 

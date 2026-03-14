@@ -38,6 +38,7 @@ jobs:
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
+          node-version: 24
           registry-url: "https://registry.npmjs.org"
 
       - name: Configure Git
@@ -68,7 +69,7 @@ jobs:
       - name: Format CHANGELOG
         run: |
           bunx markdownlint-cli2 --fix "CHANGELOG.md"
-          bun run format
+          bun run lint:fix
 
       - name: Publish to npm
         run: npm publish --provenance --access public
