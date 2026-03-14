@@ -2,8 +2,8 @@
   "name": "@pyyupsk/storehub",
   "type": "module",
   "version": "0.0.0",
-  "description": "A TypeScript library template with modern tooling",
-  "author": "",
+  "description": "Unofficial TypeScript client for the StoreHub POS API",
+  "author": "pyyupsk",
   "license": "MIT",
   "homepage": "https://github.com/pyyupsk/storehub#readme",
   "repository": {
@@ -14,15 +14,15 @@
     "url": "https://github.com/pyyupsk/storehub/issues"
   },
   "keywords": [
+    "storehub",
+    "pos",
+    "api-client",
     "typescript",
-    "template",
-    "npm",
-    "library",
+    "retail",
+    "inventory",
+    "pos-system",
+    "store-management",
     "bun",
-    "prettier",
-    "eslint",
-    "vitest",
-    "git-cliff",
     "esm",
     "cjs"
   ],
