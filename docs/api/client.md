@@ -11,7 +11,7 @@ This is an **unofficial** community-built library and is not affiliated with or 
 ```typescript
 import { StoreHubClient } from "@pyyupsk/storehub";
 
-const client = new StoreHubClient(config: StoreHubClientConfig);
+const client = new StoreHubClient(config);
 ```
 
 ### Configuration
@@ -141,7 +141,8 @@ import { StoreHubApiError } from "@pyyupsk/storehub";
 
 try {
   await client.getProducts();
-} catch (error) {
+}
+catch (error) {
   if (error instanceof StoreHubApiError) {
     console.error(error.status); // HTTP status code
     console.error(error.url); // Request URL

@@ -1,30 +1,31 @@
-import { CustomerResource } from "../features/customer/resource";
 import type {
   Customer,
   CustomerSearchParams,
 } from "../features/customer/types";
-import { EmployeeResource } from "../features/employee/resource";
 import type {
   Employee,
   EmployeeSearchParams,
 } from "../features/employee/types";
-import { InventoryResource } from "../features/inventory/resource";
 import type { Stock } from "../features/inventory/types";
-import { ProductResource } from "../features/product/resource";
 import type { Product } from "../features/product/types";
-import { StoreResource } from "../features/store/resource";
 import type { Store } from "../features/store/types";
-import { TimesheetResource } from "../features/timesheet/resource";
 import type {
   Timesheet,
   TimesheetSearchParams,
 } from "../features/timesheet/types";
-import { TransactionResource } from "../features/transaction/resource";
 import type {
   Transaction,
   TransactionSearchParams,
 } from "../features/transaction/types";
-import { StoreHubHttpClient, type StoreHubHttpClientConfig } from "./http";
+import type { StoreHubHttpClientConfig } from "./http";
+import { CustomerResource } from "../features/customer/resource";
+import { EmployeeResource } from "../features/employee/resource";
+import { InventoryResource } from "../features/inventory/resource";
+import { ProductResource } from "../features/product/resource";
+import { StoreResource } from "../features/store/resource";
+import { TimesheetResource } from "../features/timesheet/resource";
+import { TransactionResource } from "../features/transaction/resource";
+import { StoreHubHttpClient } from "./http";
 
 export type StoreHubClientConfig = StoreHubHttpClientConfig;
 
@@ -93,7 +94,7 @@ export class StoreHubClient {
    * @returns Matching customers.
    */
   public async getCustomers(
-    params: CustomerSearchParams = {}
+    params: CustomerSearchParams = {},
   ): Promise<Customer[]> {
     return this.customer.list(params);
   }
@@ -115,7 +116,7 @@ export class StoreHubClient {
    * @returns Matching transactions.
    */
   public async getTransactions(
-    params: TransactionSearchParams = {}
+    params: TransactionSearchParams = {},
   ): Promise<Transaction[]> {
     return this.transaction.list(params);
   }
@@ -127,7 +128,7 @@ export class StoreHubClient {
    * @returns Matching employees.
    */
   public async getEmployees(
-    params: EmployeeSearchParams = {}
+    params: EmployeeSearchParams = {},
   ): Promise<Employee[]> {
     return this.employee.list(params);
   }
@@ -148,7 +149,7 @@ export class StoreHubClient {
    * @returns Matching timesheet records.
    */
   public async getTimesheets(
-    params: TimesheetSearchParams = {}
+    params: TimesheetSearchParams = {},
   ): Promise<Timesheet[]> {
     return this.timesheet.list(params);
   }

@@ -17,7 +17,7 @@ export class StoreHubApiError extends Error {
    */
   public constructor(
     message: string,
-    options: { status: number; url: string; responseBody?: string }
+    options: { status: number; url: string; responseBody?: string },
   ) {
     super(message);
     this.name = "StoreHubApiError";

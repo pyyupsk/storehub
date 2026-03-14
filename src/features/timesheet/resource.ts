@@ -1,4 +1,4 @@
-import { StoreHubHttpClient } from "../../core/http";
+import type { StoreHubHttpClient } from "../../core/http";
 import type { Timesheet, TimesheetSearchParams } from "./types";
 
 /**

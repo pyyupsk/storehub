@@ -1,4 +1,4 @@
-import { StoreHubHttpClient } from "../../core/http";
+import type { StoreHubHttpClient } from "../../core/http";
 import type { Customer, CustomerSearchParams } from "./types";
 
 /**
@@ -34,7 +34,7 @@ export class CustomerResource {
    */
   public async getByRefId(refId: string): Promise<Customer | null> {
     return this.http.getJsonOrNull<Customer>(
-      `/customers/${encodeURIComponent(refId)}`
+      `/customers/${encodeURIComponent(refId)}`,
     );
   }
 }

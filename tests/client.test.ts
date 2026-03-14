@@ -1,9 +1,9 @@
+import type { FetchLike, QueryParams, StoreHubApiError } from "../src";
+
 import { describe, expect, it } from "vitest";
+import { StoreHubClient } from "../src";
 
-import type { FetchLike, QueryParams } from "../src";
-import { StoreHubApiError, StoreHubClient } from "../src";
-
-describe("StoreHubClient", () => {
+describe("storeHubClient", () => {
   it("throws when storeName is empty", () => {
     expect(
       () =>
@@ -11,7 +11,7 @@ describe("StoreHubClient", () => {
           storeName: "   ",
           apiToken: "token",
           fetcher: createFetchMock(() => jsonResponse([])),
-        })
+        }),
     ).toThrow("storeName cannot be empty");
   });
 
@@ -19,9 +19,9 @@ describe("StoreHubClient", () => {
     const fetcher = createFetchMock((url, init) => {
       expect(url).toBe("https://api.storehubhq.com/products");
       expect(init?.method).toBe("GET");
-      expect(init?.headers?.["Accept"]).toBe("application/json");
-      expect(init?.headers?.["Authorization"]).toBe(
-        `Basic ${Buffer.from("demo:secret").toString("base64")}`
+      expect(init?.headers?.Accept).toBe("application/json");
+      expect(init?.headers?.Authorization).toBe(
+        `Basic ${Buffer.from("demo:secret").toString("base64")}`,
       );
 
       return jsonResponse([{ id: "p1", name: "Coffee", priceType: "Fixed" }]);
@@ -79,7 +79,7 @@ describe("StoreHubClient", () => {
 
       expect(parsedUrl.pathname).toBe("/employees");
       expect(parsedUrl.searchParams.get("modifiedSince")).toBe(
-        "2026-02-13T10:00:00.000Z"
+        "2026-02-13T10:00:00.000Z",
       );
 
       return jsonResponse([]);
@@ -120,7 +120,7 @@ describe("StoreHubClient", () => {
     } as unknown as QueryParams;
 
     await expect(client.getTransactions(invalidParams)).rejects.toThrow(
-      "Invalid query value type"
+      "Invalid query value type",
     );
   });
 });
@@ -128,20 +128,20 @@ describe("StoreHubClient", () => {
 function createFetchMock(
   implementation: (
     url: string,
-    init?: { method?: string; headers?: Record<string, string> }
+    init?: { method?: string; headers?: Record<string, string> },
   ) => {
     ok: boolean;
     status: number;
     json: () => Promise<unknown>;
     text: () => Promise<string>;
-  }
+  },
 ): FetchLike {
   return async (url, init) => implementation(url, init);
 }
 
 function jsonResponse(
   body: unknown,
-  status = 200
+  status = 200,
 ): {
   ok: boolean;
   status: number;
@@ -158,7 +158,7 @@ function jsonResponse(
 
 function textResponse(
   body: string,
-  status: number
+  status: number,
 ): {
   ok: boolean;
   status: number;

@@ -8,22 +8,22 @@ export interface FetchRequestInitLike {
 export interface FetchResponseLike {
   readonly ok: boolean;
   readonly status: number;
-  json(): Promise<unknown>;
-  text(): Promise<string>;
+  json: () => Promise<unknown>;
+  text: () => Promise<string>;
 }
 
 export type FetchLike = (
   input: string,
-  init?: FetchRequestInitLike
+  init?: FetchRequestInitLike,
 ) => Promise<FetchResponseLike>;
 
-export type PrimitiveQueryValue =
-  | string
-  | number
-  | boolean
-  | Date
-  | null
-  | undefined;
+export type PrimitiveQueryValue
+  = | string
+    | number
+    | boolean
+    | Date
+    | null
+    | undefined;
 
 export type QueryParams = Record<string, PrimitiveQueryValue>;
 
@@ -53,7 +53,7 @@ export class StoreHubHttpClient {
 
     if (storeName.length === 0) {
       throw new Error(
-        "StoreHubClient config error: storeName cannot be empty."
+        "StoreHubClient config error: storeName cannot be empty.",
       );
     }
     if (apiToken.length === 0) {
@@ -61,10 +61,11 @@ export class StoreHubHttpClient {
     }
 
     this.baseUrl = normalizeBaseUrl(
-      config.baseUrl ?? "https://api.storehubhq.com"
+      config.baseUrl ?? "https://api.storehubhq.com",
     );
 
     const globalFetch = (globalThis as { fetch?: FetchLike }).fetch;
+    // eslint-disable-next-line ts/no-use-before-define
     this.fetcher = config.fetcher ?? globalFetch ?? missingFetchImplementation;
 
     const basicAuthToken = encodeBasicAuth(`${storeName}:${apiToken}`);
@@ -104,7 +105,7 @@ export class StoreHubHttpClient {
    */
   public async getJsonOrNull<T>(
     path: string,
-    query: QueryParams = {}
+    query: QueryParams = {},
   ): Promise<T | null> {
     const url = this.buildUrl(path, query);
     const response = await this.fetcher(url, {
@@ -143,9 +144,30 @@ export class StoreHubHttpClient {
   }
 }
 
+function normalizeQueryValue(
+  value: Exclude<QueryParams[string], null | undefined>,
+): string {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  if (typeof value === "number") {
+    return String(value);
+  }
+  if (typeof value === "boolean") {
+    return value ? "true" : "false";
+  }
+
+  throw new TypeError(
+    "Invalid query value type. Expected string, number, boolean, or Date.",
+  );
+}
+
 const missingFetchImplementation: FetchLike = async () => {
   throw new Error(
-    "StoreHubClient requires a fetch implementation. Pass config.fetcher when fetch is unavailable."
+    "StoreHubClient requires a fetch implementation. Pass config.fetcher when fetch is unavailable.",
   );
 };
 
@@ -157,7 +179,7 @@ function encodeBasicAuth(value: string): string {
   const buffer = (
     globalThis as {
       Buffer?: {
-        from(input: string): { toString(encoding: "base64"): string };
+        from: (input: string) => { toString: (encoding: "base64") => string };
       };
     }
   ).Buffer;
@@ -177,48 +199,28 @@ function encodeBasicAuth(value: string): string {
 async function createStoreHubApiError(
   path: string,
   response: FetchResponseLike,
-  url: string
+  url: string,
 ): Promise<StoreHubApiError> {
   const responseBody = await safeReadResponseBody(response);
-  const options =
-    responseBody === undefined
+  const options
+    = responseBody === undefined
       ? { status: response.status, url }
       : { status: response.status, url, responseBody };
 
   return new StoreHubApiError(
     `StoreHub request failed (${response.status}) for ${path}.`,
-    options
+    options,
   );
 }
 
 async function safeReadResponseBody(
-  response: FetchResponseLike
+  response: FetchResponseLike,
 ): Promise<string | undefined> {
   try {
     const body = await response.text();
     return body.length > 0 ? body : undefined;
-  } catch {
+  }
+  catch {
     return undefined;
   }
-}
-
-function normalizeQueryValue(
-  value: Exclude<QueryParams[string], null | undefined>
-): string {
-  if (value instanceof Date) {
-    return value.toISOString();
-  }
-  if (typeof value === "string") {
-    return value;
-  }
-  if (typeof value === "number") {
-    return String(value);
-  }
-  if (typeof value === "boolean") {
-    return value ? "true" : "false";
-  }
-
-  throw new TypeError(
-    "Invalid query value type. Expected string, number, boolean, or Date."
-  );
 }

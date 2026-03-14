@@ -1,4 +1,4 @@
-import { StoreHubHttpClient } from "../../core/http";
+import type { StoreHubHttpClient } from "../../core/http";
 import type { Stock } from "./types";
 
 /**
@@ -24,7 +24,7 @@ export class InventoryResource {
    */
   public async getByStoreId(storeId: string): Promise<Stock[]> {
     return this.http.getJson<Stock[]>(
-      `/inventory/${encodeURIComponent(storeId)}`
+      `/inventory/${encodeURIComponent(storeId)}`,
     );
   }
 }

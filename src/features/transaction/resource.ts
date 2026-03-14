@@ -1,4 +1,4 @@
-import { StoreHubHttpClient } from "../../core/http";
+import type { StoreHubHttpClient } from "../../core/http";
 import type { Transaction, TransactionSearchParams } from "./types";
 
 /**
@@ -23,7 +23,7 @@ export class TransactionResource {
    * @returns Matching transactions.
    */
   public async list(
-    params: TransactionSearchParams = {}
+    params: TransactionSearchParams = {},
   ): Promise<Transaction[]> {
     return this.http.getJson<Transaction[]>("/transactions", params);
   }

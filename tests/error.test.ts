@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { StoreHubApiError } from "../src";
 
-describe("StoreHubApiError", () => {
+describe("storeHubApiError", () => {
   const message = "Request failed";
 
   it("stores status, url, and optional body", () => {

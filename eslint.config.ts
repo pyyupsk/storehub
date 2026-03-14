@@ -1,51 +1,74 @@
-import js from "@eslint/js";
-import { defineConfig } from "eslint/config";
-import eslintConfigPrettier from "eslint-config-prettier";
-import jsdoc from "eslint-plugin-jsdoc";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
+import antfu from "@antfu/eslint-config";
 import sonarjs from "eslint-plugin-sonarjs";
-import globals from "globals";
-import tseslint from "typescript-eslint";
 
-const JS_TS_FILES = "**/*.{js,mjs,cjs,ts,mts,cts}";
-
-export default defineConfig([
+export default antfu(
   {
-    ignores: ["**/.vitepress/cache/**", "**/.vitepress/dist/**", "dist/**"],
-  },
-  {
-    files: [JS_TS_FILES],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.node },
-  },
-  tseslint.configs.recommended,
-  sonarjs.configs.recommended,
-  {
-    files: [JS_TS_FILES],
-    plugins: {
-      "simple-import-sort": simpleImportSort,
+    typescript: true,
+    vue: false,
+    react: false,
+    stylistic: {
+      indent: 2,
+      quotes: "double",
+      semi: true,
     },
     rules: {
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
+      // Import sorting
+      "sort-imports": [
+        "error",
+        {
+          ignoreCase: false,
+          ignoreDeclarationSort: true,
+        },
+      ],
+      "sort-keys": "off",
+
+      // TypeScript
+      "ts/no-non-null-assertion": "off",
+
+      // Style
+      "style/no-multiple-empty-lines": [
+        "error",
+        {
+          max: 1,
+          maxBOF: 0,
+          maxEOF: 0,
+        },
+      ],
+
+      // Node.js globals
+      "node/prefer-global/buffer": "off",
     },
   },
   {
-    files: [JS_TS_FILES],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     rules: {
-      // ===== SonarJS Rules =====
+      // JSDoc requirements for public APIs
+      "jsdoc/require-jsdoc": [
+        "error",
+        {
+          publicOnly: true,
+          require: {
+            FunctionDeclaration: true,
+            MethodDefinition: true,
+            ClassDeclaration: true,
+          },
+        },
+      ],
+      "jsdoc/require-description": "error",
+      "jsdoc/require-param": "error",
+      "jsdoc/require-param-description": "error",
+      "jsdoc/require-returns": "error",
+      "jsdoc/require-returns-description": "error",
+      "jsdoc/check-param-names": "error",
+      "jsdoc/check-tag-names": "error",
+      "jsdoc/check-types": "error",
+      "jsdoc/no-types": "error",
 
-      // Complexity
+      // SonarJS rules
       "sonarjs/cognitive-complexity": ["error", 15],
       "sonarjs/cyclomatic-complexity": ["error", { threshold: 10 }],
       "sonarjs/nested-control-flow": ["error", { maximumNestingLevel: 4 }],
-      "sonarjs/expression-complexity": ["error", { max: 3 }],
-
-      // Code size
       "sonarjs/max-lines-per-function": ["error", { maximum: 200 }],
-
-      // Code quality
       "sonarjs/no-duplicate-string": ["error", { threshold: 3 }],
       "sonarjs/no-identical-functions": "error",
       "sonarjs/no-redundant-boolean": "error",
@@ -60,8 +83,6 @@ export default defineConfig([
       "sonarjs/prefer-immediate-return": "error",
       "sonarjs/prefer-object-literal": "error",
       "sonarjs/prefer-while": "error",
-
-      // Best practices
       "sonarjs/no-ignored-return": "error",
       "sonarjs/no-collection-size-mischeck": "error",
       "sonarjs/no-element-overwrite": "error",
@@ -70,51 +91,20 @@ export default defineConfig([
       "sonarjs/no-use-of-empty-return-value": "error",
       "sonarjs/non-existent-operator": "error",
     },
-  },
-  {
-    files: ["src/**/*.ts"],
-    plugins: { jsdoc },
-    extends: ["jsdoc/flat/recommended-typescript-error"],
-    rules: {
-      // ===== JSDoc Rules =====
-
-      // Require JSDoc for public APIs
-      "jsdoc/require-jsdoc": [
-        "error",
-        {
-          publicOnly: true,
-          require: {
-            FunctionDeclaration: true,
-            MethodDefinition: true,
-            ClassDeclaration: true,
-            ArrowFunctionExpression: false,
-            FunctionExpression: false,
-          },
-        },
-      ],
-
-      // Content requirements
-      "jsdoc/require-description": "error",
-      "jsdoc/require-param": "error",
-      "jsdoc/require-param-description": "error",
-      "jsdoc/require-returns": "error",
-      "jsdoc/require-returns-description": "error",
-
-      // Validation
-      "jsdoc/check-param-names": "error",
-      "jsdoc/check-tag-names": "error",
-      "jsdoc/check-types": "error",
-
-      // Formatting
-      "jsdoc/check-alignment": "error",
-      "jsdoc/check-indentation": "error",
-      "jsdoc/check-line-alignment": ["error", "never"],
-      "jsdoc/tag-lines": ["error", "any", { startLines: 1 }],
-
-      // TypeScript-specific: no types in JSDoc (use TS types)
-      "jsdoc/no-types": "error",
+    plugins: {
+      sonarjs,
     },
   },
-  // Must be last to disable formatting rules that conflict with Prettier
-  eslintConfigPrettier,
-]);
+  {
+    files: ["**/*.md"],
+    rules: {
+      "markdown/heading-increment": "off",
+    },
+  },
+  {
+    files: ["docs/**/*.md"],
+    rules: {
+      "markdown/heading-increment": "off",
+    },
+  },
+);

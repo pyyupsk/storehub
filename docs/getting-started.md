@@ -111,7 +111,7 @@ const timesheets = await client.getTimesheets({
 The client throws `StoreHubApiError` for failed requests:
 
 ```typescript
-import { StoreHubClient, StoreHubApiError } from "@pyyupsk/storehub";
+import { StoreHubApiError, StoreHubClient } from "@pyyupsk/storehub";
 
 const client = new StoreHubClient({
   storeName: "your-store",
@@ -120,7 +120,8 @@ const client = new StoreHubClient({
 
 try {
   const products = await client.getProducts();
-} catch (error) {
+}
+catch (error) {
   if (error instanceof StoreHubApiError) {
     console.error(`API Error: ${error.status} - ${error.message}`);
     console.error(`URL: ${error.url}`);

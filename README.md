@@ -202,7 +202,8 @@ import { StoreHubApiError } from "@pyyupsk/storehub";
 
 try {
   const products = await client.getProducts();
-} catch (error) {
+}
+catch (error) {
   if (error instanceof StoreHubApiError) {
     console.error(`Status: ${error.status}`);
     console.error(`URL: ${error.url}`);
@@ -230,13 +231,13 @@ All types are exported for your use:
 
 ```typescript
 import type {
-  Product,
   Customer,
-  Transaction,
-  Stock,
   Employee,
+  Product,
+  Stock,
   Store,
   Timesheet,
+  Transaction,
 } from "@pyyupsk/storehub";
 ```
 

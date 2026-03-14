@@ -1,5 +1,8 @@
 import type { UserConfig } from "@commitlint/types";
 
+const MENTION_PATTERN = /@[a-z][\w-]*/gi;
+const BACKTICK_CODE_PATTERN = /`[^`]*`/g;
+
 const config: UserConfig = {
   extends: ["@commitlint/config-conventional"],
   plugins: [
@@ -7,12 +10,11 @@ const config: UserConfig = {
       rules: {
         "no-at-mentions": ({ body, subject }) => {
           const text = `${subject || ""} ${body || ""}`.replaceAll(
-            /`[^`]*`/g,
-            ""
+            BACKTICK_CODE_PATTERN,
+            "",
           );
 
-          const mentionPattern = /@[a-zA-Z][a-zA-Z0-9_-]*/g;
-          const mentions = text.match(mentionPattern);
+          const mentions = text.match(MENTION_PATTERN);
 
           if (mentions && mentions.length > 0) {
             return [

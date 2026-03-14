@@ -1,4 +1,4 @@
-import { StoreHubHttpClient } from "../../core/http";
+import type { StoreHubHttpClient } from "../../core/http";
 import type { Product } from "./types";
 
 /**
@@ -33,7 +33,7 @@ export class ProductResource {
    */
   public async getById(id: string): Promise<Product | null> {
     return this.http.getJsonOrNull<Product>(
-      `/products/${encodeURIComponent(id)}`
+      `/products/${encodeURIComponent(id)}`,
     );
   }
 }
