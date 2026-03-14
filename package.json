@@ -1,7 +1,7 @@
 {
   "name": "@pyyupsk/storehub",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Unofficial TypeScript client for the StoreHub POS API",
   "author": "pyyupsk",
   "license": "MIT",
