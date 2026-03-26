@@ -82,7 +82,7 @@
     "jiti": "^2.6.1",
     "knip": "^5.86.0",
     "lefthook": "^2.1.4",
-    "markdownlint-cli2": "^0.21.0",
+    "markdownlint-cli2": "^0.22.0",
     "tsdown": "^0.21.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0",
