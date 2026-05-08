@@ -12,11 +12,12 @@
 
     // Additional
     "resolveJsonModule": true,
+    "types": ["node"],
 
     // Emit (tsdown handles actual output)
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "dist"]
 }
