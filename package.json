@@ -76,7 +76,7 @@
     "@types/node": "^25.6.2",
     "@vitest/coverage-v8": "^4.1.5",
     "eslint": "^10.3.0",
-    "eslint-plugin-jsdoc": "^62.9.0",
+    "eslint-plugin-jsdoc": "^63.0.0",
     "eslint-plugin-simple-import-sort": "^13.0.0",
     "eslint-plugin-sonarjs": "^4.0.3",
     "globals": "^17.6.0",
